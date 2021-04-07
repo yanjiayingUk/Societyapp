@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        #foot {
+            border-collapse: collapse;
+            width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            margin-top: 30%;
+        }
+        table {
+            border-collapse: collapse;
+            width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+            display: block;
+            margin-top: 100px;
+        }
+        table td, table th {
+            color: #666;
+            height: 45px;
+        }
+        table thead th {
+            background-color: #fff;
+            width: 220px;
+        }
+        #action{
+            background-color: #CCE8EB;
+            border: 1px solid #eee;
+            width: 260px;    
+        }
+        table tr {
+            background: #fff;
+        }
+
+        .container {
+            margin-top: 80px;
+        }
+        button{
+            background-color: #1daea9;
+        }
+    </style> 
+</head>
+<body>
+    
+    <div class="container">
+            
+        <table  class="table">
+            <thead>
+                <tr>
+                    <!-- <th>用户ID</th> -->
+                    <th>宠物ID</th>
+                    <th>宠物名</th>
+                    <th>宠物年龄</th>
+                    <th>宠物性别</th>
+                    <th></th>
+                    <th id="action">编辑</th>
+                    <th></th>
+                    <th id="action">删除</th>
+                </tr>
+            </thead>
+
+            <tbody id="result"></tbody>
+            <%for(var i=0;i < petinfo.length;i++){%>
+                <tr>
+                    <!-- <td>
+                                <%= petinfo[i]["userId"]%>
+                    </td> -->
+                    <td>
+                        <%= petinfo[i]["petId"]%>
+                    </td>
+                    <td>
+                        <%= petinfo[i]["petName"]%>
+                    </td>
+                    <td>
+                            <%= petinfo[i]["petAge"]%>
+                    </td>
+                    <td>
+                        <%= petinfo[i]["petSex"]%>
+                    </td><td></td>
+                    <td>
+                    <button>
+                        编辑
+                    </button></td><td></td>
+                    <td>
+                            <button><a href="/delpet?petId=<%=petinfo[i]["petId"]%>&&userId=<%=petinfo[i]["userId"]%>">
+                                删除</a>
+                            </button>
+                    </td>
+                </tr>
+            <%}%>
+
+        </table>
+        <div id="foot">
+            <p style="float: left;" onclick="showUser()">返回上一页</p>
+            <p style="float: right;">确认</p>
+        </div>
+        
+    </div>
+    
+        
+</body>
+<script>
+function showUser() {
+        window.location = "http://localhost:3000/userguanli";
+    }
+</script>
+<script>
+   
+</script>
+</html>

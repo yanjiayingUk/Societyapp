@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>编辑界面</title>
+    <link rel="stylesheet" href="../stylesheets/css.css">
+    <style>
+        /* 注册界面 */
+        .zhuce{
+            height: 450px;
+            width: 800px;
+            border:1px solid rgb(185, 183, 183);
+            float: left;
+            margin-left: 60px;
+        }
+        .divv{
+            height: 50px;
+            width: 500px;
+            margin-top: 14px;
+            margin-left: 150px;
+            float: left;
+        }
+        .zhuce h3{
+            float: left;
+        }
+        .zhuce input{
+            float: left;
+            width: 300px;
+            height: 30px;
+            margin-top: 10px;
+            margin-left: 20px;
+        }
+        .zhuce button{
+            width:200px;
+            height:40px;
+            float: right;
+            background-color:#1daea9;
+            border:0;
+            border-radius: 8px;
+            color:white;
+            font-size:20px;
+            font-weight: bolder;
+            margin-right: 30px;
+            margin-top: 10px;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <div id="login_form">
+        <div class="title">
+            <img src='../images/qi-4.png'/>	
+            吾宠后台管理系统			
+        </div>
+        <div class="left">
+            <div class="a" style="background: #1daea9;">
+                <h1 onclick="showSystem()">系统管理</h1>
+            </div>
+            <div class="a">
+                <h1  onclick="showDongTai()">动态管理</h1>
+            </div>
+            <div class="a">
+                <h1 onclick="showAct()">娱乐管理</h1>
+            </div>
+            <div class="a">
+                <h1 onclick="showUser()">用户管理</h1>
+            </div>
+        </div>
+        
+        <form class="zhuce" action="/editDynamic?dynamicId=<%=editDList[0].dynamicId%>" method="POST">
+            <div class="divv">
+                <h3>标题:</h3>
+                <input type="text" name="content" value=<%=editDList[0].dynamicContent%>>
+            </div>
+            <div class="divv">
+                <h3>图片:</h3>
+                <input type="text" name="img" value=<%=editDList[0].dynamicImg%>>
+            </div>
+            <div class="divv">
+                <h3>点赞次数:</h3>
+                <input type="text" name="num" value=<%=editDList[0].likeNum%>>
+            </div>
+            <div><button>确认</button></div>
+            
+        </form>
+
+    </div>
+</body>
+<script>
+   function showSystem() {
+        window.location = "http://localhost:3000/system";
+    }
+
+    function showDongTai() {
+        window.location = "http://localhost:3000/dongtai";
+    }
+    function showAct() {
+        window.location = "http://localhost:3000/activity";
+    }
+    function showUser() {
+        window.location = "http://localhost:3000/userguanli";
+    }
+</script>
+</html>

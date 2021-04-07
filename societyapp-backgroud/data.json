@@ -1,0 +1,52 @@
+{
+    "users": [
+        {
+            "username": "zhangsan",
+            "password": "123456"
+        }
+    ],
+    "chapterList1": [
+        {
+            "title": "三股冷空气接连来袭 北方多地雨雪降温",
+            "views": 10
+        },
+        {
+            "title": "多地企业工资指导线温和调整 你的工资涨了吗？",
+            "views": 20
+        },
+        {
+            "title": "填补空白！中国首款10兆瓦级海上风电机组通过认证？",
+            "views": 30
+        }
+    ],
+    "chapterList": [
+        {
+            "uID": "u1",
+            "pID": "p1",
+            "pname":"小巴",
+            "page":"8",
+            "psex":"女生",
+            "plei":"田园",
+            "dakaID":"d1",
+            "dname":"刷牙和小巴一起",
+            "dnum":4,
+            "dtime":"05:30",
+            "btel":14258986320,
+            "actionID":"爱牙牙-1"
+        },
+        {
+            "uID": "u2",
+            "pID": "p2",
+            "pname":"小古",
+            "page":"6",
+            "psex":"男生",
+            "plei":"英短",
+            "dakaID":"d2",
+            "dname":"散步",
+            "dnum":14,
+            "dtime":"17:30",
+            "btel":17589641358,
+            "actionID":"选美-2"
+        }
+    ]
+}
