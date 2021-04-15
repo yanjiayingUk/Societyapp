@@ -90,8 +90,9 @@ export default class Community extends Component {
             username: 'admin'
         }
     }
+    // fetch('http://192.168.233.1:3001/dt/list')
     componentDidMount() {
-        fetch('http://192.168.233.1:3001/dt/list')
+        fetch('http://192.168.233.1:3001/huodong')
             .then(res => res.json())
             .then(res => {
                 console.log(res);
