@@ -11,6 +11,29 @@ const { height, width } = Dimensions.get('window')
 const w = width / 640;
 
 export default class Home extends Component {
+  componentDidMount() {
+    var filelist = [];
+    // var filelist = '';
+
+    console.log(this.state.files)
+    console.log(filelist);
+    fetch('"http://192.168.233.1:3001/yijian', {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: `snum=${this.state.snum}&content=${this.state.content}`
+    })
+        .then(res => res.json())
+        .then(res => {
+            console.log(res);
+            this.setState({
+                dataa: res.dataa
+            })
+            Actions.pop();
+        })
+}
   render() {
     return (
       <View style={{ width: '100%', height: "100%", flex: 1 }}>
