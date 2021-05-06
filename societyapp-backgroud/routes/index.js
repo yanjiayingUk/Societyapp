@@ -14,6 +14,146 @@ router.get('/', function(req, res, next) {
   res.render('login', { title:'高校社团后台管理系统' });
   console.log(req.query);
 });
+
+//查找个人资料
+router.post("/login/person", function (req, res, next) {
+  var username=req.body.username;
+  var con = mysql.createConnection(dbconfig);
+  con.connect();
+  con.query("select username,intro,sex,snumber,college from login where username=?",[username], function (err, result) {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      console.log(result);
+      var response = {
+        message:result[0]
+      }
+      res.json(response);
+    }
+  })
+})
+
+//更新个人资料
+router.post("/newintroduce/add",function(req,res,next){
+  var intro=req.body.intro;
+  var username=req.body.username;
+  var sex=req.body.sex;
+  var snumber=req.body.snumber;
+  var college=req.body.college;
+  // console.log(username,birth,sex);
+  var con=mysql.createConnection(dbconfig);
+  // console.log(username, imgpath, sex, birth, oldusername);
+  con.connect();
+  // update chapters set content=? where chapterid=?  更新，注册创建
+  // insert into users(username,imgpath,sex,birth) values(?,?,?,?)
+  con.query("update login set intro=?,sex=?,snumber=?,college=? where username=?",[intro,sex,snumber,college,username],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.end("success");
+    }
+  })
+})
+
+// 提交动态
+router.post("/dt/save", function (req, res, next) {
+  // var timestamp = new Date().getTime();
+  // var timestamp = (new Date()).valueOf();
+  var timestamp = Date.parse(new Date());
+  var username = req.body.username;
+  var content = req.body.content;
+  var picpath = "../../assets/yjy/ytx.png";
+  console.log(timestamp,username,content);
+  // console.log(picpath);
+  // var aa = 'picpath';
+
+  // var aa=picpath.toString('base64');
+  // console.log(aa);
+
+  // console.log(req.body);
+  var con = mysql.createConnection(dbconfig);
+  con.connect();
+  con.query("insert into dt(username,content,picpath,createtime) values(?,?,?,?)", [username, content,picpath, timestamp], function (err, result) {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      var response = {
+        message: 'success'
+      }
+      res.json(response);
+    }
+  })
+})
+
+// 获取我的动态
+router.post("/dt/mine", function (req, res, next) {
+  var username = req.body.username;
+  // var username = req.body.username;
+  var con = mysql.createConnection(dbconfig);
+  con.connect();
+  con.query("select login.username,imgpath,content,createtime,picpath from login,dt where login.username=dt.username and dt.username=? Order By createtime Desc", [username], function (err, result) {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      // console.log(result)
+      for (var i = 0; i < result.length; i++) {
+        var time = new Date(parseInt(result[i].createtime));
+        result[i].createtime = time.toLocaleDateString().replace(/\//g, "-") + " " + time.toTimeString().substr(0, 8);
+      }
+      var response = {
+        message: result
+      }
+      res.json(response);
+    }
+  })
+})
+
+// 获取动态列表
+router.get("/dt/list", function (req, res, next) {
+  var con = mysql.createConnection(dbconfig);
+  con.connect();
+  con.query("select login.username,content,createtime,picpath from dt,login where dt.username=login.username Order By createtime Desc", function (err, result) {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      for (var i = 0; i < result.length; i++) {
+        var time = new Date(parseInt(result[i].createtime));
+        result[i].createtime = time.toLocaleDateString().replace(/\//g, "-") + " " + time.toTimeString().substr(0, 8);
+      }
+      // console.log(result)
+      var response = {
+        message: result
+      }
+      res.json(response);
+    }
+  })
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // /* POST 登录验证 && GET login page. */
 router.get('/login', function(req, res, next) {
   var response = {
