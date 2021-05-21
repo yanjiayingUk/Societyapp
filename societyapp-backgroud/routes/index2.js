@@ -17,10 +17,10 @@ router.get('/', function(req, res, next) {
 
 //查找个人资料
 router.post("/login/person", function (req, res, next) {
-  var sname=req.body.username;
+  var username=req.body.username;
   var con = mysql.createConnection(dbconfig);
   con.connect();
-  con.query("select sname,intro,sex,snum,college from user where sname=?",[sname], function (err, result) {
+  con.query("select username,intro,sex,snumber,college from login where username=?",[username], function (err, result) {
     if (err) {
       console.log(err);
     }
@@ -33,6 +33,49 @@ router.post("/login/person", function (req, res, next) {
     }
   })
 })
+
+//5.1.1
+router.get('/',function(req,res,next){
+  res.render('login',{title:'高校社团后台管理系统'});
+  console.log(req.query);
+})
+//5.1.2
+router.post('/editManager',function(req,res,next){
+
+})
+
+con.query("delete from user where snum=?",[snum],function(err,result){
+  if(err){
+    console.log(err);
+  }
+  else{
+    console.log(result);
+    res.redirect("/system");
+  }
+});
+
+
+res.render('editM',{editMList:result});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //更新个人资料
 router.post("/newintroduce/add",function(req,res,next){
